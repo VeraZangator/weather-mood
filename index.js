@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const compression = require("compression");
 const cookieSession = require("cookie-session");
-const csurf = require("csurf");
+// const csurf = require("csurf");
 const request = require("request");
 const argv = require("yargs").argv;
 const secrets = require("./secrets.json");
@@ -24,13 +24,13 @@ app.use(
 
 app.use(express.json());
 app.use(express.static("./public"));
-app.use(csurf());
-
-app.use((req, res, next) => {
-    res.set("x-frame-options", "DENY");
-    res.cookie("mytoken", req.csrfToken());
-    next();
-});
+// app.use(csurf());
+//
+// app.use((req, res, next) => {
+//     res.set("x-frame-options", "DENY");
+//     res.cookie("mytoken", req.csrfToken());
+//     next();
+// });
 
 if (process.env.NODE_ENV != "production") {
     app.use(
@@ -65,8 +65,12 @@ app.get("/weather/:input", (req, res) => {
                             res.json({ weather });
                         } else {
                             let image = JSON.parse(body);
-                            if (image.total >= 3) {
-                                imageUrl = image.hits[2].largeImageURL;
+                            console.log("the images", image);
+                            console.log(image.total);
+                            if (image.total >= 1) {
+                                imageUrl =
+                                    image.hits[Math.floor(Math.random() * 4)]
+                                        .largeImageURL;
                                 res.json({ weather, imageUrl });
                             } else {
                                 imageUrl = "/bg.jpg";
