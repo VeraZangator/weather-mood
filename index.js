@@ -1,20 +1,11 @@
 const express = require("express");
 const app = express();
 const compression = require("compression");
-const cookieSession = require("cookie-session");
-// const csurf = require("csurf");
 const request = require("request");
 const argv = require("yargs").argv;
 const secrets = require("./secrets.json");
 
 app.use(compression());
-
-const cookieSessionMiddleware = cookieSession({
-    secret: `I'm always angry.`,
-    maxAge: 1000 * 60 * 60 * 24 * 90
-});
-
-app.use(cookieSessionMiddleware);
 
 app.use(
     express.urlencoded({
@@ -24,13 +15,6 @@ app.use(
 
 app.use(express.json());
 app.use(express.static("./public"));
-// app.use(csurf());
-//
-// app.use((req, res, next) => {
-//     res.set("x-frame-options", "DENY");
-//     res.cookie("mytoken", req.csrfToken());
-//     next();
-// });
 
 if (process.env.NODE_ENV != "production") {
     app.use(
@@ -44,9 +28,10 @@ if (process.env.NODE_ENV != "production") {
 }
 
 app.get("/weather/:input", (req, res) => {
-    let apiKey = secrets.OWM_KEY;
+    let owmKey = secrets.OWM_KEY || process.env.OWM_KEY;
+    let pixKey = secrets.PIX_KEY || process.env.PIX_KEY;
     let city = argv.c || req.params.input;
-    let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+    let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${owmKey}`;
     let imageUrl;
     request(url, function(err, response, body) {
         if (err) {
@@ -58,7 +43,7 @@ app.get("/weather/:input", (req, res) => {
                 res.json({ notfound: true });
             } else {
                 request(
-                    `https://pixabay.com/api/?key=${secrets.PIX_KEY}&q=${city}&image_type=photo`,
+                    `https://pixabay.com/api/?key=${pixKey}&q=${city}&image_type=photo`,
                     function(err, response, body) {
                         if (err) {
                             console.log("error:", err);
