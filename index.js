@@ -3,7 +3,7 @@ const app = express();
 const compression = require("compression");
 const request = require("request");
 const argv = require("yargs").argv;
-const secrets = require("./secrets.json");
+// const secrets = require("./secrets.json");
 
 app.use(compression());
 
@@ -28,8 +28,8 @@ if (process.env.NODE_ENV != "production") {
 }
 
 app.get("/weather/:input", (req, res) => {
-    let owmKey = secrets.OWM_KEY || process.env.OWM_KEY;
-    let pixKey = secrets.PIX_KEY || process.env.PIX_KEY;
+    let owmKey = process.env.OWM_KEY;
+    let pixKey = process.env.PIX_KEY;
     let city = argv.c || req.params.input;
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${owmKey}`;
     let imageUrl;
