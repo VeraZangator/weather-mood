@@ -75,6 +75,6 @@ app.get("*", function(req, res) {
 });
 //**NEVER DELETE**NEVER DELETE**NEVER DELETE
 
-app.listen(8080, function() {
+app.listen(process.env.PORT || 8080, function() {
     console.log("I'm listening.");
 });
