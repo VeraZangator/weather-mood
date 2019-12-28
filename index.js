@@ -45,13 +45,12 @@ app.get("/weather/:input", (req, res) => {
                 request(
                     `https://pixabay.com/api/?key=${pixKey}&q=${city}&image_type=photo`,
                     function(err, response, body) {
+                        imageUrl = "/bg.jpg";
                         if (err) {
                             console.log("error:", err);
-                            res.json({ weather });
+                            res.json({ weather, imageUrl });
                         } else {
                             let image = JSON.parse(body);
-                            console.log("the images", image);
-                            console.log(image.total);
                             if (image.total >= 1) {
                                 imageUrl =
                                     image.hits[Math.floor(Math.random() * 4)]
