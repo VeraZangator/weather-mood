@@ -1,10 +1,24 @@
 import React from "react";
 import Weather from "./weather";
+import Forecast from "./forecast";
+import { BrowserRouter, Route } from "react-router-dom";
 
 export default function App() {
     return (
         <React.Fragment>
-            <Weather />
+            <div className="logo">
+                {" "}
+                <img src="/weather_logo.png" />
+                <img src="/pixabay_logo.png" />
+            </div>
+            <BrowserRouter>
+                <Route exact path="/" render={() => <Weather />} />
+                <Route
+                    exact
+                    path="/forecast/:city"
+                    render={() => <Forecast />}
+                />
+            </BrowserRouter>
         </React.Fragment>
     );
 }

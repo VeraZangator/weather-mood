@@ -15,5 +15,13 @@ export function reducer(state = {}, action) {
         };
     }
 
+    if (action.type == "GET_FORECAST") {
+        console.log("EN REDUUUUCRE", action);
+        state = {
+            ...state,
+            forecast: action.forecast
+        };
+    }
+
     return state;
 }

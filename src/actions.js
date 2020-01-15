@@ -8,3 +8,12 @@ export async function getWeatherCity(userInput) {
         weather: data
     };
 }
+
+export async function getForecast(city) {
+    const { data } = await axios.get(`/forecast/${city}`);
+    console.log("DATS EN ACTION", data);
+    return {
+        type: "GET_FORECAST",
+        forecast: data
+    };
+}

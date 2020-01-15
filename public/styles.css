@@ -6,7 +6,8 @@
     outline: none;
 }
 
-#weather-container {
+#weather-container,
+#forecast-container {
     height: 100vh;
     width: 100vw;
     display: grid;
@@ -52,4 +53,151 @@ input {
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 55px;
     margin-top: 15px;
+}
+
+a {
+    color: #cccccc;
+    margin-top: 25px;
+    text-decoration: none;
+}
+
+/* forecast */
+.forecast {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-flow: column;
+    width: 820px;
+    height: 820px;
+    border-radius: 410px;
+    padding-top: 175px;
+    align-items: center;
+}
+
+.forecast-table {
+    display: flex;
+    margin: 25px;
+    margin-top: 0;
+    padding: 10px;
+}
+
+.forecast-table div {
+    padding: 15px;
+    display: grid;
+    justify-items: center;
+}
+
+.forecast-table div>* {
+    margin: 3px;
+}
+
+.city {
+    color: #cccccc;
+    font-size: 60px;
+    font-family: "Suranna", serif;
+}
+
+.forecast-table img {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 55px;
+    margin-top: 15px;
+}
+
+/* logos */
+.logo {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid #cccccc;
+    border-radius: 15px;
+    width: 80px;
+    display: grid;
+    justify-items: center;
+    right: 0;
+    bottom: 0;
+}
+
+.logo img {
+    width: 70px;
+}
+
+/* media queries */
+@media screen and (min-width: 100px) and (max-width: 800px) {
+    .inweather {
+        border-radius: 100px;
+        padding: 10px;
+        height: 200px;
+        width: 200px;
+    }
+
+    .logo {
+        width: 40px;
+    }
+
+    .logo img {
+        width: 30px;
+    }
+
+    input {
+        font-size: 12px;
+        width: 90px;
+        margin-bottom: 5px;
+    }
+
+    .weather p {
+        font-size: 12px;
+        justify-self: center;
+    }
+
+    .weather img {
+        margin-top: 9px;
+        height: 30px;
+    }
+
+    /* forecast */
+    .forecast {
+        color: white;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        flex-flow: column;
+        width: 350px;
+        height: 350px;
+        border-radius: 175px;
+        padding-top: 25px;
+        align-items: center;
+    }
+
+    .forecast-table {
+        display: flex;
+        margin: 5px;
+        margin-top: 0;
+        padding: 5px;
+    }
+
+    .forecast-table div {
+        padding: 5px;
+        display: grid;
+        justify-items: center;
+    }
+
+    .forecast-table div>* {
+        font-size: 10px;
+        margin: 1px;
+    }
+
+    .city {
+        color: #cccccc;
+        font-size: 40px;
+        font-family: "Suranna", serif;
+    }
+
+    .forecast-table img {
+        width: 25px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 12.5px;
+        margin-top: 5px;
+    }
+
+    a {
+        margin-top: 10px;
+    }
 }

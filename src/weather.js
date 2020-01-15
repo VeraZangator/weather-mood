@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWeatherCity } from "./actions";
-
+import { Link } from "react-router-dom";
 export default function Weather() {
     const [userInput, setUserInput] = useState("");
     const dispatch = useDispatch();
@@ -42,9 +42,7 @@ export default function Weather() {
                         handleClick(e);
                     }}
                 />
-                {weatherCity && weatherCity.notfound && (
-                    <p className="weather">Sorry, not found</p>
-                )}
+                {weatherCity && weatherCity.notfound && <p>Sorry, not found</p>}
                 {weatherCity && !weatherCity.notfound && (
                     <div className="weather">
                         <p>
@@ -53,9 +51,13 @@ export default function Weather() {
                             in <strong>{weatherCity.weather.name}</strong>,
                             {weatherCity.weather.sys.country}
                         </p>
+
                         <img
                             src={`/${weatherCity.weather.weather[0].icon}.png`}
                         />
+                        <Link to={`/forecast/${weatherCity.weather.name}`}>
+                            <p>See the forecast</p>
+                        </Link>
                     </div>
                 )}
             </div>
